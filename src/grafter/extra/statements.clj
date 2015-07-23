@@ -1,4 +1,4 @@
-(ns grafter-extra.statements)
+(ns grafter.extra.statements)
 
 (defn statements-where [attr-map statements]
   "Filters a sequence of statements according to an attribute map

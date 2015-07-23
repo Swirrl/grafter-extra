@@ -1,7 +1,7 @@
-(ns grafter-extra.statements-test
+(ns grafter.extra.statements-test
   (:require [clojure.test :refer :all]
             [grafter.rdf.protocols :refer [->Quad]]
-            [grafter-extra.statements :refer :all]
+            [grafter.extra.statements :refer :all]
             [grafter.vocabularies.rdf :refer :all]))
 
 (deftest statements-where-test
