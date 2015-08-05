@@ -7,6 +7,7 @@
       (= "" string)))
 
 (defn first-sentence [string]
+  "Takes the first sentence from a paragraph"
   (if string
     (first (st/split string #"\. "))))
 
