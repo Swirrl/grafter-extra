@@ -10,3 +10,10 @@
           dataset-c (make-dataset [[0] [0] [0]] [:a])]
       (is (datasets-match? dataset-a dataset-b))
       (is (not (datasets-match? dataset-a dataset-c))))))
+
+(deftest trim-all-strings-test
+  (testing "Cleans whitespace"
+    (let [dirty    (make-dataset [[" left" "right " " both "]] [" really" "dirty " " whitespace "])
+          expected (make-dataset [[ "left" "right"   "both" ]] [ "really" "dirty"   "whitespace" ])
+          cleaned  (trim-all-strings dirty)]
+      (is (= cleaned expected)))))
