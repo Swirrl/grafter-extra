@@ -53,8 +53,7 @@
   serialising a sequence of quads into separate files for each graph."
 
   (-> uri
-      (st/split #"graph\/")
-      last
+      (st/replace #":" "_")
       (st/replace #"\/" "_")
       (st/replace #"\?" "_")
       (st/replace #"\&" "_")
