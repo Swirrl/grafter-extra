@@ -11,12 +11,24 @@
   (if string
     (first (st/split string #"\. "))))
 
+(defn strip-non-value-chars [^java.lang.String string]
+  (.replaceAll string "[^\\.0123456789]" ""))
+
 (defmulti parseValue class)
-(defmethod parseValue nil                 [x] nil)
-(defmethod parseValue java.lang.Character [x] (Character/getNumericValue x))
-(defmethod parseValue java.lang.String    [x] (if (= "" x)
-                                                nil
-                                                (if (.contains x ".")
-                                                  (Double/parseDouble x)
-                                                  (Integer/parseInt x))))
-(defmethod parseValue :default            [x] x)
+
+(defmethod parseValue nil [x]
+  nil)
+
+(defmethod parseValue java.lang.Character [x]
+  (parseValue (.toString x)))
+
+(defmethod parseValue java.lang.String [x]
+  (let [cleaned (strip-non-value-chars x)]
+    (if (= "" cleaned)
+      nil
+      (if (.contains cleaned ".")
+        (Double/parseDouble cleaned)
+        (Integer/parseInt cleaned)))))
+
+(defmethod parseValue :default [x]
+  x)
