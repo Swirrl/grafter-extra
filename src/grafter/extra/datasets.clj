@@ -18,3 +18,13 @@
     (-> (make-dataset (->> dataset :rows (map trim-in-row))
                       (map trim-if-string (column-names dataset)))
         (with-meta (meta dataset)))))
+
+(defn ensure-presence-of [dataset column]
+  (if (some #(= column %) (column-names dataset))
+    (let [na-rows (->> dataset
+                       :rows
+                       (filter #(nil? (% column))))]
+      (if (not-empty na-rows)
+        (throw (RuntimeException. (str "Some rows have no value for column '" column "' e.g. " (first na-rows)))))
+      dataset)
+    (throw (RuntimeException. (str "Column " column " is missing from the dataset column headers.")))))
