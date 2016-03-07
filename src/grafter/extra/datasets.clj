@@ -1,5 +1,6 @@
 (ns grafter.extra.datasets
   (:require [clojure.string :as st]
+            [grafter.sequences :as seqs]
             [grafter.tabular :refer [make-dataset column-names]]))
 
 (defn row-set [dataset]
@@ -28,3 +29,11 @@
         (throw (RuntimeException. (str "Some rows have no value for column '" column "' e.g. " (first na-rows)))))
       dataset)
     (throw (RuntimeException. (str "Column " column " is missing from the dataset column headers.")))))
+
+(defn revert-header-to-first-row [dataset]
+  "Not for use with make-dataset. For modifying datasets that are fed into
+   pipelines that already include a (make-dataset move-first-row-to-header) step."
+  (let [old-rows (-> dataset :rows)
+        new-rows (cons (-> old-rows first keys) (map vals old-rows))
+        headers (take (-> old-rows first count) (seqs/alphabetical-column-names))]
+    [headers new-rows]))

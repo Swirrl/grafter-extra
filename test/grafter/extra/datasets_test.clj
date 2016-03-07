@@ -1,6 +1,6 @@
 (ns grafter.extra.datasets-test
   (:require [clojure.test :refer :all]
-            [grafter.tabular :refer [make-dataset]]
+            [grafter.tabular :refer [make-dataset move-first-row-to-header]]
             [grafter.extra.datasets :refer :all]))
 
 (deftest datasets-match-test
@@ -28,3 +28,10 @@
                    (ensure-presence-of hubbard :contents))))
     (testing "Passes when column is present and complete"
       (ensure-presence-of hubbard :place))))
+
+(deftest revert-header-to-first-row-test
+  (let [raw (make-dataset [["food" "price"] ["borek" 1.9] ["pizza" 2.5]])
+        interpreted (make-dataset raw move-first-row-to-header)
+        re-rawed (revert-header-to-first-row interpreted)]
+    (testing "Allows for round-tripping via headers"
+      (datasets-match? raw re-rawed))))
