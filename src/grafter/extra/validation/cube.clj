@@ -1,5 +1,6 @@
 (ns grafter.extra.validation.cube
   (:require
+   [clojure.java.io :as io]
    [grafter.rdf.repository :refer [repo query ->connection]]))
 
 (defn- ask [repository ask-query]
@@ -8,7 +9,7 @@
       result)))
 
 (defn cube-resource [filename]
-  (slurp (str "./resources/validation/cube/" filename)))
+  (->> filename (str "validation/cube/") io/resource slurp))
 
 (defn query-resource [filename]
   (str (cube-resource "prefixes.sparql")
