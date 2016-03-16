@@ -19,9 +19,9 @@
   "Returns a function that tests that a condition holds for the data in a
    given repository.
 
-   Whereas the source ASK queries from the data-cube specification return
-   true if the constraint is violated, these predicate functions will return
-   true if the constraint holds (i.e. when the data is valid).
+   Whereas the ASK queries from the data-cube specification return true if
+   the constraint is violated, these predicate functions will return true if
+   the constraint holds (i.e. when the data is valid).
 
    Well-formed cube specification: https://www.w3.org/TR/vocab-data-cube/#wf"
   
@@ -41,5 +41,7 @@
         unique-dsd?))
 
 (defn well-formed-cube? [repository]
-  "Returns true only if every integrity constraint holds"
+  "Returns true only if no integrity constraints are broken. This is not a
+   sufficient test for cube validity: an empty repository will succeed (as it
+   possesses no badly-formed cubes)."
   (every? true? ((apply juxt all-constraints) repository)))
