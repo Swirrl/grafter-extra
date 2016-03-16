@@ -26,6 +26,6 @@
        (map :s)
        distinct))
 
-(defn count-of-type? [rdf-type statements]
+(defn count-of-type [rdf-type statements]
   "Counts unique subjects where `?s a <rdf-type>`"
   (count (unique-uris-of-type rdf-type statements)))
