@@ -34,3 +34,11 @@
 (def unique-dsd?
   "Every qb:DataSet has exactly one associated qb:DataStructureDefinition."
   (integrity-constraint "unique-dsd.sparql"))
+
+(def all-constraints
+  (list unique-dataset?
+        unique-dsd?))
+
+(defn well-formed-cube? [repository]
+  "Returns true only if every integrity constraint holds"
+  (every? true? ((apply juxt all-constraints) repository)))
