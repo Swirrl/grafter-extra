@@ -4,7 +4,13 @@
             [grafter.extra.repository :refer [with-repository-containing]]
             [grafter.extra.validation.cube :refer :all]))
 
-(deftest well-formed-cube-test
-  (testing "can be executed"
+(deftest assert-well-formed-test
+  (testing "Nothing thrown with well-formed cubes"
     (with-repository-containing [r "./test/resources/cube.ttl"]
-      (is (true? (well-formed-cube? r))))))
+      (assert-well-formed r)))
+
+  (testing "Errors thrown with badly-formed cube"
+    (with-repository-containing [r "./test/resources/cube-bad.ttl"]
+      (is (thrown-with-msg? AssertionError
+                            #"Malformed Cube"
+                            (assert-well-formed r))))))

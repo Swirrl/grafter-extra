@@ -1,0 +1,11 @@
+@prefix qb:       <http://purl.org/linked-data/cube#> .
+@prefix eg:       <http://example.org/ns#> .
+
+eg:d1 a qb:DataSet .
+
+eg:d2 a qb:DataSet .
+
+eg:o1 a qb:Observation;
+  qb:dataSet eg:d1;
+  qb:dataSet eg:d2;
+  .
