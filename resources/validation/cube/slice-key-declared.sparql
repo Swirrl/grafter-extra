@@ -1,0 +1,4 @@
+ASK {
+    ?sliceKey a qb:SliceKey .
+    FILTER NOT EXISTS { [a qb:DataStructureDefinition] qb:sliceKey ?sliceKey }
+}

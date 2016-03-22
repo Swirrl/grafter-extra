@@ -7,6 +7,7 @@
 (deftest assert-well-formed-test
   (testing "Nothing thrown with well-formed cubes"
     (with-repository-containing [r "./test/resources/cube.ttl"]
+      (normalise-cube r)
       (assert-well-formed r)))
 
   (testing "Errors thrown with badly-formed cube"

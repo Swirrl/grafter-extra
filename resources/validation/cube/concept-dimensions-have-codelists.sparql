@@ -1,0 +1,5 @@
+ASK {
+  ?dim a qb:DimensionProperty ;
+       rdfs:range skos:Concept .
+  FILTER NOT EXISTS { ?dim qb:codeList [] }
+}

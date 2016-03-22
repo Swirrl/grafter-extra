@@ -1,0 +1,4 @@
+ASK {
+  ?dsd a qb:DataStructureDefinition .
+  FILTER NOT EXISTS { ?dsd qb:component [qb:componentProperty [a qb:MeasureProperty]] }
+}
