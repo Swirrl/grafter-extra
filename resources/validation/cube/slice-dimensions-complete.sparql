@@ -1,0 +1,4 @@
+ASK {
+  ?slice qb:sliceStructure [qb:componentProperty ?dim] .
+  FILTER NOT EXISTS { ?slice ?dim [] }
+}
