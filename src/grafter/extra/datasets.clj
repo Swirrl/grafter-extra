@@ -1,7 +1,7 @@
 (ns grafter.extra.datasets
   (:require [clojure.string :as st]
             [grafter.sequences :as seqs]
-            [grafter.tabular :refer [make-dataset column-names]]))
+            [grafter.tabular :refer [make-dataset column-names columns]]))
 
 (defn row-set [dataset]
   (-> dataset :rows set))
@@ -37,3 +37,10 @@
         new-rows (cons (-> old-rows first keys) (map vals old-rows))
         headers (take (-> old-rows first count) (seqs/alphabetical-column-names))]
     [headers new-rows]))
+
+(defn select-columns [dataset selector-fn]
+  "Select columns using a function"
+  (let [selected-columns (filter selector-fn (column-names dataset))]
+    (if (empty? selected-columns)
+      (throw (RuntimeException. "No columns selected"))
+      (columns dataset selected-columns))))

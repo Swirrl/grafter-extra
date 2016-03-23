@@ -35,3 +35,9 @@
         re-rawed (revert-header-to-first-row interpreted)]
     (testing "Allows for round-tripping via headers"
       (datasets-match? raw re-rawed))))
+
+(deftest select-columns-test
+  (testing "Select columns with a set"
+    (let [dataset (make-dataset [[1 2 3] [4 5 6] [7 8 9]] [:x :y :z])]
+      (is (datasets-match? (make-dataset [[1 3] [4 6] [7 9]] [:x :z])
+                           (select-columns dataset #{:x :z}))))))
