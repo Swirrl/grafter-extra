@@ -1,7 +1,8 @@
 (ns grafter.extra.datasets
   (:require [clojure.string :as st]
             [grafter.sequences :as seqs]
-            [grafter.tabular :refer [make-dataset column-names columns]]))
+            [grafter.tabular :refer [make-dataset column-names columns]]
+            [incanter.core :refer [nrow]]))
 
 (defn row-set [dataset]
   (-> dataset :rows set))
@@ -10,6 +11,31 @@
   (let [row-set-a (row-set dataset-a)
         row-set-b (row-set dataset-b)]
     (= row-set-a row-set-b)))
+
+(defn- all-identical? [coll]
+  (apply = (partition 2 1 coll)))
+
+(defn row-bind [& datasets]
+  "Combine datasets by appending rows. Column names must match."
+  { :pre [(all-identical? (map column-names datasets))]}
+  (let [headers (column-names (first datasets))
+        rows    (mapcat :rows datasets)]
+    (with-meta
+      (make-dataset rows headers)
+      (apply merge (map meta datasets)))))
+
+(defn column-bind [& datasets]
+  "Combine datasets by appending columns. Row lengths must match."
+  (let [column-lengths (->> datasets (map nrow) distinct)]
+    (if (not= 1 (count column-lengths))
+      (throw (RuntimeException. (str "Can't column-bind datasets with different column-lengths (i.e. row counts): " (st/join ", " column-lengths))))
+      (let [all-columns (mapcat column-names datasets)
+            merged-rows (->> datasets
+                             (map :rows)
+                             (apply interleave)
+                             (partition (count datasets))
+                             (map (partial apply merge)))]
+        (make-dataset merged-rows all-columns)))))
 
 (defn trim-all-strings [dataset]
   "Removes leading and trailing whitespace from every string in the dataset.

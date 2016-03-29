@@ -12,6 +12,18 @@
       (is (datasets-match? dataset-a dataset-b))
       (is (not (datasets-match? dataset-a dataset-c))))))
 
+(deftest column-bind-test
+  (testing "Binds columns together"
+    (let [a (make-dataset [[1 "apple"] [2 "banana"] [3 "orange"]] [:number :fruit])
+          b (make-dataset [["one"] ["two"] ["three"]] [:name])]
+      (is (datasets-match? (column-bind a b)
+                           (make-dataset [[1 "apple" "one"] [2 "banana" "two"] [3 "orange" "three"]] [:number :fruit :name])))))
+  (testing "Fails if column lengths differ"
+    (let [short (make-dataset [[1]] [:number])
+          long (make-dataset [["one"] ["two"]] [:name])]
+      (is (thrown? java.lang.RuntimeException
+                   (column-bind short long))))))
+
 (deftest trim-all-strings-test
   (testing "Cleans whitespace"
     (let [dirty    (make-dataset [[" left" "right " " both "]] [" really" "dirty " " whitespace "])
