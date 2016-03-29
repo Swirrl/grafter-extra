@@ -41,3 +41,13 @@
     (let [dataset (make-dataset [[1 2 3] [4 5 6] [7 8 9]] [:x :y :z])]
       (is (datasets-match? (make-dataset [[1 3] [4 6] [7 9]] [:x :z])
                            (select-columns dataset #{:x :z}))))))
+
+(deftest row-transformers-test
+  (testing "Transforms rows"
+    (let [original (with-meta (make-dataset [[1 2 3] [1 2 3] [11 12 13]] [:a :b :c]) {:foo :bar})
+          transformed (transform-rows original distinct)
+          expected (with-meta (make-dataset [[1 2 3] [11 12 13]] [:a :b :c]) {:foo :bar})]
+      (testing "replaces rows"
+          (is (= transformed expected)))
+      (testing "maintains metadata"
+        (is (= (meta transformed) (meta original)))))))

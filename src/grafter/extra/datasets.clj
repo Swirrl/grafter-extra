@@ -44,3 +44,26 @@
     (if (empty? selected-columns)
       (throw (RuntimeException. "No columns selected"))
       (columns dataset selected-columns))))
+
+(defn transform-rows [dataset row-transformer]
+  (-> (make-dataset (-> dataset :rows row-transformer)
+                    (column-names dataset))
+      (with-meta (meta dataset))))
+
+(defn unique-rows [dataset]
+  "Eagerly de-duplicates the dataset. Useful for building smaller files of triples.
+  If you want to stay lazy then you could let the triplestore de-dupe."
+  (transform-rows dataset distinct))
+
+(defn drop-where [dataset pred column-or-columns]
+  (if (sequential? column-or-columns)
+    (letfn [(drop-where-reverse [pred column dataset] (drop-where dataset pred column))]
+      ((apply comp (for [column column-or-columns]
+                     (partial drop-where-reverse pred column))) dataset))
+    (transform-rows dataset (fn [rows] (remove #(pred (% column-or-columns)) rows)))))
+
+(defn take-where [dataset pred column]
+  (transform-rows dataset (fn [rows] (filter #(pred (% column)) rows))))
+
+(defn mapcat-rows [dataset f]
+  (transform-rows dataset (fn [rows] (mapcat f rows))))
