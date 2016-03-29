@@ -1,7 +1,8 @@
 (ns grafter.extra.datasets-test
   (:require [clojure.test :refer :all]
-            [grafter.tabular :refer [make-dataset move-first-row-to-header]]
-            [grafter.extra.datasets :refer :all]))
+            [grafter.tabular :refer [make-dataset move-first-row-to-header column-names]]
+            [grafter.extra.datasets :refer :all]
+            [grafter.extra.cell.string :refer [blank?]]))
 
 (deftest datasets-match-test
   (testing "Compares rows regardless of order"
@@ -51,3 +52,24 @@
           (is (= transformed expected)))
       (testing "maintains metadata"
         (is (= (meta transformed) (meta original)))))))
+
+(deftest drop-where-test
+  (testing "Drop where"
+
+    (testing "on single columns"
+      (let [dataset-full (make-dataset [[1 "one"] [2 "two"] [3 "three"]] [:a :b])
+            dataset-filtered (drop-where dataset-full odd? :a)
+            dataset-expected (make-dataset [[2 "two"]] [:a :b])]
+        (is (= dataset-filtered
+               dataset-expected))
+        (is (= (column-names dataset-filtered)
+               [:a :b]))))
+
+    (testing "on multiple columns"
+      (let [dataset-full (make-dataset [["" "Leonardo"] ["Raphael" ""] ["Donatello" "Michelangeolo"]] [:a :b])
+            dataset-filtered (drop-where dataset-full blank? [:a :b])
+            dataset-expected (make-dataset [["Donatello" "Michelangeolo"]] [:a :b])]
+        (is (= dataset-filtered
+               dataset-expected))
+        (is (= (column-names dataset-filtered)
+               [:a :b]))))))
