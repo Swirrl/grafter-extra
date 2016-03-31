@@ -12,12 +12,9 @@
         row-set-b (row-set dataset-b)]
     (= row-set-a row-set-b)))
 
-(defn- all-identical? [coll]
-  (apply = (partition 2 1 coll)))
-
 (defn row-bind [& datasets]
+  { :pre [(apply = (map column-names datasets))]}
   "Combine datasets by appending rows. Column names must match."
-  { :pre [(all-identical? (map column-names datasets))]}
   (let [headers (column-names (first datasets))
         rows    (mapcat :rows datasets)]
     (with-meta

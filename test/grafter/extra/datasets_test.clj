@@ -1,6 +1,6 @@
 (ns grafter.extra.datasets-test
   (:require [clojure.test :refer :all]
-            [grafter.tabular :refer [make-dataset move-first-row-to-header column-names]]
+            [grafter.tabular :refer [make-dataset move-first-row-to-header column-names test-dataset]]
             [grafter.extra.datasets :refer :all]
             [grafter.extra.cell.string :refer [blank?]]))
 
@@ -23,6 +23,21 @@
           long (make-dataset [["one"] ["two"]] [:name])]
       (is (thrown? java.lang.RuntimeException
                    (column-bind short long))))))
+
+(deftest row-bind-test
+  (testing "Binds rows together"
+    (let [a (test-dataset 2 3)
+          b (test-dataset 4 3)]
+      (is (= 6 (-> (row-bind a b) :rows count)))))
+  (testing "Fails if column headers differ"
+    (let [a (test-dataset 2 3)
+          c (test-dataset 4 5)]
+      (is (thrown? java.lang.AssertionError
+                   (row-bind a c)))))
+  (testing "Works with single dataset"
+    (is (= 3 (-> (row-bind (test-dataset 3 3)) :rows count))))
+  (testing "Works with three datasets"
+    (is (= 9 (-> (row-bind (test-dataset 3 3) (test-dataset 3 3) (test-dataset 3 3)) :rows count)))))
 
 (deftest trim-all-strings-test
   (testing "Cleans whitespace"
