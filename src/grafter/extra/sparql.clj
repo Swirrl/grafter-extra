@@ -1,6 +1,7 @@
 (ns grafter.extra.sparql
   (:require [grafter.sequences :refer [alphabetical-column-names]]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [selmer.parser :as selmer]))
 
 (defn to-var [string]
   (str "?" string))
@@ -62,3 +63,7 @@
                  ["}"])))
 
 (def ggp group-graph-pattern)
+
+(defn template
+  [filename]
+  (partial selmer/render-file filename))
