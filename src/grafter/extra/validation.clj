@@ -7,10 +7,9 @@
       result)))
 
 (defn constraint-asserter [invalid? ask-query message]
-  "Returns a function for testing that a condition, specified by the ask-query,
-   holds for the data in a given repository.
-
-   The definition of an invalid response is given by invalid?"
+  "Returns a function for asserting that a condition, specified by the ask-query,
+   holds for the data in a given repository. Throws an AssertionError if the response
+   is invalid."
   
   (fn [repository]
     (if (invalid? (ask repository ask-query))
@@ -24,3 +23,16 @@
   "Throws an AssertionError unless matching data is found (i.e. the ASK returns false)"
   (constraint-asserter false? ask-query message))
 
+
+(defn constraint-checker [invalid? ask-query message]
+  "Returns a function for checking that a condition, specified by the ask-query,
+   hold for the data in a given repository. Returns the message if the response
+   is invalid."
+
+  (fn [repository]
+    (if (invalid? (ask repository ask-query))
+      message)))
+
+(defn presence-checker [ask-query message]
+  "Returns the message unless matching data is found"
+  (constraint-checker false? ask-query message))

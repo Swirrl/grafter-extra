@@ -1,0 +1,5 @@
+PREFIX pmd: <http://publishmydata.com/def/dataset#>
+
+ASK {
+  <{{dataset-uri}}> a pmd:Dataset .
+}
