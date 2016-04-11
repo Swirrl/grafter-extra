@@ -22,7 +22,7 @@
   (checker "ds-has-modified.sparql" dataset-uri "is missing a dcterms:modified"))
 
 (defn check-for-refarea [dataset-uri]
-  (checker "ds-has-refarea.sparql" dataset-uri "is missing a reference Area dimension"))
+  (checker "ds-has-refarea.sparql" dataset-uri "is missing a reference area dimension"))
 
 (defn add-error [errors error]
   (conj errors error))
