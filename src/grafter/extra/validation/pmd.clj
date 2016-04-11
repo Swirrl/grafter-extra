@@ -21,6 +21,9 @@
 (defn check-for-modified [dataset-uri]
   (checker "ds-has-modified.sparql" dataset-uri "is missing a dcterms:modified"))
 
+(defn check-for-refarea [dataset-uri]
+  (checker "ds-has-refarea.sparql" dataset-uri "is missing a reference Area dimension"))
+
 (defn add-error [errors error]
   (conj errors error))
 
@@ -28,7 +31,8 @@
   (let [apply-check (fn [check] ((check dataset-uri) repo))
         checks (list check-for-pmd-dataset
                      check-for-pmd-graph
-                     check-for-title)]
+                     check-for-title
+                     check-for-refarea)]
     (->> checks (map apply-check) (remove nil?))))
 
 

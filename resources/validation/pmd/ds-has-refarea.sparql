@@ -1,0 +1,15 @@
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+ASK {
+  <{{dataset-uri}}>qb:structure/qb:component/qb:dimension ?dimension .
+
+  {
+    ?dimension ?p ?o .
+    FILTER ( ?dimension = dim:refArea)
+  } UNION {
+    # Consider using * instead of + (+ is one or many, * is zero or many)
+    ?dimension rdfs:subPropertyOf+ dim:refArea .
+  }
+}
