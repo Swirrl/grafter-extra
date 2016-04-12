@@ -10,7 +10,8 @@
   (let [expected (list "is not a pmd:Dataset"
                        "is missing a pmd:graph"
                        "is missing a dcterms:title"
-                       "is missing a reference area dimension")
+                       "is missing a reference area dimension"
+                       "is missing codelists")
         invalid (with-repository-containing [r "./test/resources/cube-bad.ttl"]
                   (doall (errors r "http://example.org/ns#dataset-le3")))
         valid (with-repository-containing [r "./test/resources/outdoor-visits.nt"]
