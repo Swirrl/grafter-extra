@@ -24,12 +24,16 @@
 (defn check-for-refarea [dataset-uri]
   (checker "ds-has-refarea.sparql" dataset-uri "is missing a reference area dimension"))
 
+(defn check-for-codelists [dataset-uri]
+  (checker "ds-has-codelists.sparql" dataset-uri "is missing codelists"))
+
 (defn errors [repo dataset-uri]
   (let [apply-check (fn [check] ((check dataset-uri) repo))
         checks (list check-for-pmd-dataset
                      check-for-pmd-graph
                      check-for-title
-                     check-for-refarea)]
+                     check-for-refarea
+                     check-for-codelists)]
     (->> checks (map apply-check) (remove nil?))))
 
 (defn omissions [repo dataset-uri]
