@@ -1,6 +1,0 @@
-PREFIX qb: <http://purl.org/linked-data/cube#>
-
-ASK {
-  <{{dataset-uri}}> qb:structure/qb:component/qb:codeList ?codelist .
-  ?codelist ?p ?o .
-}

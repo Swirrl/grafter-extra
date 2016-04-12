@@ -398,3 +398,34 @@
 <http://statistics.gov.scot/data/outdoor-visits/year/2013/S92000003/percent-of-adults/ratio> <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> <http://statistics.gov.scot/def/concept/measure-units/percent-of-adults> .
 <http://statistics.gov.scot/data/outdoor-visits/year/2013/S92000003/percent-of-adults/ratio> <http://purl.org/linked-data/cube#dataSet> <http://statistics.gov.scot/data/outdoor-visits> .
 <http://statistics.gov.scot/data/outdoor-visits/year/2013/S92000003/percent-of-adults/ratio> <http://statistics.gov.scot/def/measure-properties/ratio> "46"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://statistics.gov.scot/id/statistical-geography/S92000003> <http://www.w3.org/2000/01/rdf-schema#label> "Scotland" .
+<http://reference.data.gov.uk/id/year/2006> <http://www.w3.org/2000/01/rdf-schema#label> "2006" .
+<http://reference.data.gov.uk/id/year/2007> <http://www.w3.org/2000/01/rdf-schema#label> "2007" .
+<http://reference.data.gov.uk/id/year/2008> <http://www.w3.org/2000/01/rdf-schema#label> "2008" .
+<http://reference.data.gov.uk/id/year/2009> <http://www.w3.org/2000/01/rdf-schema#label> "2009" .
+<http://reference.data.gov.uk/id/year/2010> <http://www.w3.org/2000/01/rdf-schema#label> "2010" .
+<http://reference.data.gov.uk/id/year/2011> <http://www.w3.org/2000/01/rdf-schema#label> "2011" .
+<http://reference.data.gov.uk/id/year/2012> <http://www.w3.org/2000/01/rdf-schema#label> "2012" .
+<http://reference.data.gov.uk/id/year/2013> <http://www.w3.org/2000/01/rdf-schema#label> "2013" .
+<http://statistics.gov.scot/def/measure-properties/ratio> <http://www.w3.org/2000/01/rdf-schema#label> "Ratio" .
+<http://statistics.gov.scot/id/statistical-geography/S12000006> <http://www.w3.org/2000/01/rdf-schema#label> "Dumfries and Galloway" .
+<http://statistics.gov.scot/id/statistical-geography/S12000008> <http://www.w3.org/2000/01/rdf-schema#label> "East Ayrshire" .
+<http://statistics.gov.scot/id/statistical-geography/S12000014> <http://www.w3.org/2000/01/rdf-schema#label> "Falkirk" .
+<http://statistics.gov.scot/id/statistical-geography/S12000015> <http://www.w3.org/2000/01/rdf-schema#label> "Fife" .
+<http://statistics.gov.scot/id/statistical-geography/S12000017> <http://www.w3.org/2000/01/rdf-schema#label> "Highland" .
+<http://statistics.gov.scot/id/statistical-geography/S12000020> <http://www.w3.org/2000/01/rdf-schema#label> "Moray" .
+<http://statistics.gov.scot/id/statistical-geography/S12000021> <http://www.w3.org/2000/01/rdf-schema#label> "North Ayrshire" .
+<http://statistics.gov.scot/id/statistical-geography/S12000026> <http://www.w3.org/2000/01/rdf-schema#label> "Scottish Borders" .
+<http://statistics.gov.scot/id/statistical-geography/S12000029> <http://www.w3.org/2000/01/rdf-schema#label> "South Lanarkshire" .
+<http://statistics.gov.scot/id/statistical-geography/S12000033> <http://www.w3.org/2000/01/rdf-schema#label> "Aberdeen City" .
+<http://statistics.gov.scot/id/statistical-geography/S12000034> <http://www.w3.org/2000/01/rdf-schema#label> "Aberdeenshire" .
+<http://statistics.gov.scot/id/statistical-geography/S12000036> <http://www.w3.org/2000/01/rdf-schema#label> "City of Edinburgh" .
+<http://statistics.gov.scot/id/statistical-geography/S12000038> <http://www.w3.org/2000/01/rdf-schema#label> "Renfrewshire" .
+<http://statistics.gov.scot/id/statistical-geography/S12000040> <http://www.w3.org/2000/01/rdf-schema#label> "West Lothian" .
+<http://statistics.gov.scot/id/statistical-geography/S12000041> <http://www.w3.org/2000/01/rdf-schema#label> "Angus" .
+<http://statistics.gov.scot/id/statistical-geography/S12000042> <http://www.w3.org/2000/01/rdf-schema#label> "Dundee City" .
+<http://statistics.gov.scot/id/statistical-geography/S12000044> <http://www.w3.org/2000/01/rdf-schema#label> "North Lanarkshire" .
+<http://statistics.gov.scot/id/statistical-geography/S12000045> <http://www.w3.org/2000/01/rdf-schema#label> "East Dunbartonshire" .
+<http://statistics.gov.scot/id/statistical-geography/S12000046> <http://www.w3.org/2000/01/rdf-schema#label> "Glasgow City" .
+<http://reference.data.gov.uk/id/gregorian-interval/2006-01-01T00:00:00/P2Y> <http://www.w3.org/2000/01/rdf-schema#label> "2006-2008" .
+<http://reference.data.gov.uk/id/gregorian-interval/2009-01-01T00:00:00/P2Y> <http://www.w3.org/2000/01/rdf-schema#label> "2009-2011" .

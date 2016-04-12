@@ -36,3 +36,7 @@
 (defn presence-checker [ask-query message]
   "Returns the message unless matching data is found"
   (constraint-checker false? ask-query message))
+
+(defn absence-checker [ask-query message]
+  "Returns the message if matching data is found"
+  (constraint-checker true? ask-query message))

@@ -1,5 +1,5 @@
 (ns grafter.extra.validation.pmd.dataset
-  (:require [grafter.extra.validation :refer [presence-checker]]
+  (:require [grafter.extra.validation :refer [presence-checker absence-checker]]
             [grafter.extra.sparql :as sparql]))
 
 (defn template [filename]
@@ -24,8 +24,13 @@
 (defn check-for-refarea [dataset-uri]
   (checker "ds-has-refarea.sparql" dataset-uri "is missing a reference area dimension"))
 
-(defn check-for-codelists [dataset-uri]
-  (checker "ds-has-codelists.sparql" dataset-uri "is missing codelists"))
+(defn check-for-code-lists [dataset-uri]
+  (absence-checker ((template "ds-has-dimensions-without-codelists.sparql") {:dataset-uri dataset-uri})
+                   "is missing codelists"))
+
+(defn check-for-code-labels [dataset-uri]
+  (absence-checker ((template "ds-codes-without-labels.sparql") {:dataset-uri dataset-uri})
+                   "has codes missing labels"))
 
 (defn errors [repo dataset-uri]
   (let [apply-check (fn [check] ((check dataset-uri) repo))
@@ -33,7 +38,8 @@
                      check-for-pmd-graph
                      check-for-title
                      check-for-refarea
-                     check-for-codelists)]
+                     check-for-code-lists
+                     check-for-code-labels)]
     (->> checks (map apply-check) (remove nil?))))
 
 (defn omissions [repo dataset-uri]

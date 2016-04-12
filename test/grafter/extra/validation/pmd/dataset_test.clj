@@ -11,9 +11,10 @@
                        "is missing a pmd:graph"
                        "is missing a dcterms:title"
                        "is missing a reference area dimension"
-                       "is missing codelists")
+                       "is missing codelists"
+                       "has codes missing labels")
         invalid (with-repository-containing [r "./test/resources/cube-bad.ttl"]
-                  (doall (errors r "http://example.org/ns#dataset-le3")))
+                  (doall (errors r "http://example.org/ns#d1")))
         valid (with-repository-containing [r "./test/resources/outdoor-visits.nt"]
                 (doall (errors r "http://statistics.gov.scot/data/outdoor-visits")))]
     (doseq [message expected]

@@ -1,0 +1,12 @@
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+ASK {
+  <{{dataset-uri}}> qb:structure/qb:component ?component .
+
+  ?component qb:dimension ?dimension .
+
+  FILTER NOT EXISTS {
+    ?component qb:codeList ?codelist .
+  }
+}
