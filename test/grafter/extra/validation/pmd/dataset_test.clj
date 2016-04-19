@@ -10,6 +10,7 @@
   (let [expected (list "is not a pmd:Dataset"
                        "is missing a pmd:graph"
                        "is missing a dcterms:title"
+                       "is missing a rdfs:label"
                        "is missing a reference area dimension"
                        "is missing codelists"
                        "has codes missing labels"

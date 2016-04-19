@@ -18,6 +18,9 @@
 (defn check-for-title [dataset-uri]
   (checker "ds-has-title.sparql" dataset-uri  "is missing a dcterms:title"))
 
+(defn check-for-label [dataset-uri]
+  (checker "ds-has-label.sparql" dataset-uri  "is missing a rdfs:label"))
+
 (defn check-for-modified [dataset-uri]
   (checker "ds-has-modified.sparql" dataset-uri "is missing a dcterms:modified"))
 
@@ -41,6 +44,7 @@
         checks (list check-for-pmd-dataset
                      check-for-pmd-graph
                      check-for-title
+                     check-for-label
                      check-for-refarea
                      check-for-code-lists
                      check-for-code-labels
