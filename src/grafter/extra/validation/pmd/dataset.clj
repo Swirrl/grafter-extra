@@ -27,6 +27,10 @@
 (defn check-for-refarea [dataset-uri]
   (checker "ds-has-refarea.sparql" dataset-uri "is missing a reference area dimension"))
 
+(defn check-for-area-level [dataset-uri]
+  (absence-checker ((template "ds-has-area-levels.sparql") {:dataset-uri dataset-uri})
+                   "is missing reference area levels"))
+
 (defn check-for-code-lists [dataset-uri]
   (absence-checker ((template "ds-has-dimensions-without-codelists.sparql") {:dataset-uri dataset-uri})
                    "is missing codelists"))
@@ -48,7 +52,8 @@
                      check-for-refarea
                      check-for-code-lists
                      check-for-code-labels
-                     check-for-measurement-unit-labels)]
+                     check-for-measurement-unit-labels
+                     check-for-area-level)]
     (->> checks (map apply-check) (remove nil?))))
 
 (defn omissions [repo dataset-uri]

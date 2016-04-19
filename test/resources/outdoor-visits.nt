@@ -427,6 +427,30 @@
 <http://statistics.gov.scot/id/statistical-geography/S12000044> <http://www.w3.org/2000/01/rdf-schema#label> "North Lanarkshire" .
 <http://statistics.gov.scot/id/statistical-geography/S12000045> <http://www.w3.org/2000/01/rdf-schema#label> "East Dunbartonshire" .
 <http://statistics.gov.scot/id/statistical-geography/S12000046> <http://www.w3.org/2000/01/rdf-schema#label> "Glasgow City" .
+
+
+<http://statistics.gov.scot/id/statistical-geography/S92000003> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S92> .
+<http://statistics.gov.scot/id/statistical-entity/S92> <http://www.w3.org/2000/01/rdf-schema#label> "Country" .
+<http://statistics.gov.scot/id/statistical-geography/S12000020> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-entity/S12> <http://www.w3.org/2000/01/rdf-schema#label> "Council Areas" .
+<http://statistics.gov.scot/id/statistical-geography/S12000021> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000026> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000029> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000033> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000034> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000036> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000038> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000040> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000041> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000042> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000044> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000045> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000046> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000006> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000008> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000014> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000015> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
+<http://statistics.gov.scot/id/statistical-geography/S12000017> <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.gov.scot/id/statistical-entity/S12> .
 <http://reference.data.gov.uk/id/gregorian-interval/2006-01-01T00:00:00/P2Y> <http://www.w3.org/2000/01/rdf-schema#label> "2006-2008" .
 <http://reference.data.gov.uk/id/gregorian-interval/2009-01-01T00:00:00/P2Y> <http://www.w3.org/2000/01/rdf-schema#label> "2009-2011" .
 <http://statistics.gov.scot/def/concept/measure-units/percent-of-adults> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/linked-data/sdmx/2009/concept#unitMeasure> .

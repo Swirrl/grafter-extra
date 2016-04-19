@@ -12,11 +12,15 @@
                        "is missing a dcterms:title"
                        "is missing a rdfs:label"
                        "is missing a reference area dimension"
+                       "is missing reference area levels"
                        "is missing codelists"
                        "has codes missing labels"
                        "has units without labels")
         invalid (with-repository-containing [r "./test/resources/cube-bad.ttl"]
-                  (doall (errors r "http://example.org/ns#d1")))
+                  (distinct
+                   (concat
+                    (doall (errors r "http://example.org/ns#d1"))
+                    (doall (errors r "http://example.org/ns#d2")))))
         valid (with-repository-containing [r "./test/resources/outdoor-visits.nt"]
                 (doall (errors r "http://statistics.gov.scot/data/outdoor-visits")))]
     (doseq [message expected]
