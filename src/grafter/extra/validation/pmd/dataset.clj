@@ -32,6 +32,10 @@
   (absence-checker ((template "ds-codes-without-labels.sparql") {:dataset-uri dataset-uri})
                    "has codes missing labels"))
 
+(defn check-for-measurement-unit-labels [dataset-uri]
+  (absence-checker ((template "ds-units-without-labels.sparql") {:dataset-uri dataset-uri})
+                   "has units without labels"))
+
 (defn errors [repo dataset-uri]
   (let [apply-check (fn [check] ((check dataset-uri) repo))
         checks (list check-for-pmd-dataset
@@ -39,7 +43,8 @@
                      check-for-title
                      check-for-refarea
                      check-for-code-lists
-                     check-for-code-labels)]
+                     check-for-code-labels
+                     check-for-measurement-unit-labels)]
     (->> checks (map apply-check) (remove nil?))))
 
 (defn omissions [repo dataset-uri]

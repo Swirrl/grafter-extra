@@ -12,7 +12,8 @@
                        "is missing a dcterms:title"
                        "is missing a reference area dimension"
                        "is missing codelists"
-                       "has codes missing labels")
+                       "has codes missing labels"
+                       "has units without labels")
         invalid (with-repository-containing [r "./test/resources/cube-bad.ttl"]
                   (doall (errors r "http://example.org/ns#d1")))
         valid (with-repository-containing [r "./test/resources/outdoor-visits.nt"]

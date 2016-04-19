@@ -429,3 +429,8 @@
 <http://statistics.gov.scot/id/statistical-geography/S12000046> <http://www.w3.org/2000/01/rdf-schema#label> "Glasgow City" .
 <http://reference.data.gov.uk/id/gregorian-interval/2006-01-01T00:00:00/P2Y> <http://www.w3.org/2000/01/rdf-schema#label> "2006-2008" .
 <http://reference.data.gov.uk/id/gregorian-interval/2009-01-01T00:00:00/P2Y> <http://www.w3.org/2000/01/rdf-schema#label> "2009-2011" .
+<http://statistics.gov.scot/def/concept/measure-units/percent-of-adults> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/linked-data/sdmx/2009/concept#unitMeasure> .
+<http://statistics.gov.scot/def/concept/measure-units/percent-of-adults> <http://www.w3.org/2000/01/rdf-schema#label> "Percent Of Adults" .
+<http://statistics.gov.scot/def/concept/measure-units/percent-of-adults> <http://www.w3.org/2004/02/skos/core#inScheme> <http://statistics.gov.scot/def/concept-scheme/measure-units> .
+<http://statistics.gov.scot/def/concept/measure-units/percent-of-adults> <http://www.w3.org/2004/02/skos/core#topConceptOf> <http://statistics.gov.scot/def/concept-scheme/measure-units> .
+
