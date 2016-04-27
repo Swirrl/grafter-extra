@@ -16,10 +16,11 @@
   { :pre [(apply = (map column-names datasets))]}
   "Combine datasets by appending rows. Column names must match."
   (let [headers (column-names (first datasets))
-        rows    (mapcat :rows datasets)]
+        metas (apply merge (map meta datasets))
+        rows (mapcat :rows datasets)]
     (with-meta
       (make-dataset rows headers)
-      (apply merge (map meta datasets)))))
+      metas)))
 
 (defn column-bind [& datasets]
   "Combine datasets by appending columns. Row lengths must match."
@@ -38,10 +39,11 @@
   "Removes leading and trailing whitespace from every string in the dataset.
    Includes column headers as well as cell values."
   (let [trim-if-string (fn [value] (if (string? value) (st/trim value) value))
-        trim-in-row (fn [row] (->> row (apply concat) (map trim-if-string) (apply hash-map)))]
+        trim-in-row (fn [row] (->> row (apply concat) (map trim-if-string) (apply hash-map)))
+        original-meta (meta dataset)]
     (-> (make-dataset (->> dataset :rows (map trim-in-row))
                       (map trim-if-string (column-names dataset)))
-        (with-meta (meta dataset)))))
+        (with-meta original-meta))))
 
 (defn ensure-presence-of [dataset column]
   (if (some #(= column %) (column-names dataset))
@@ -69,9 +71,10 @@
       (columns dataset selected-columns))))
 
 (defn transform-rows [dataset row-transformer]
-  (-> (make-dataset (-> dataset :rows row-transformer)
-                    (column-names dataset))
-      (with-meta (meta dataset))))
+  (let [original-meta (meta dataset)]
+    (-> (make-dataset (-> dataset :rows row-transformer)
+                      (column-names dataset))
+        (with-meta original-meta))))
 
 (defn unique-rows [dataset]
   "Eagerly de-duplicates the dataset. Useful for building smaller files of triples.
