@@ -100,3 +100,15 @@
                dataset-expected))
         (is (= (column-names dataset-filtered)
                [:a :b]))))))
+
+(deftest matrix-product-test
+  (testing "Matrix Product"
+    (let [dataset-a (make-dataset [[1] [2] [3]] [:a])
+          dataset-b (make-dataset [[4] [5]] [:b])]
+      (testing "Compatible datasets (unique headers)"
+        (let [dataset-expected (make-dataset [[1 4] [1 5] [2 4] [2 5] [3 4] [3 5]] [:a :b])
+              dataset-product (matrix-product dataset-a dataset-b)]
+          (is (= dataset-product dataset-expected))))
+      (testing "Incompatible datasets (common headers)"
+        (is (thrown-with-msg? RuntimeException #"incompatible datasets"
+                              (matrix-product dataset-a dataset-a)))))))
