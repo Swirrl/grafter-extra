@@ -93,3 +93,18 @@
 
 (defn mapcat-rows [dataset f]
   (transform-rows dataset (fn [rows] (mapcat f rows))))
+
+(defn matrix-product [dataset-a dataset-b]
+  "Creates a dataset that is the product of two datasets (i.e. merge without a common key)"
+  (let [columns-a (column-names dataset-a)
+        columns-b (column-names dataset-b)
+        columns-common (filter (set columns-a) columns-b)]
+    (if (empty? columns-common)
+      (let [headers (concat columns-a columns-b)]
+        (make-dataset (mapcat
+                       (fn [row-a] (map
+                                    (fn [row-b] (merge row-a row-b))
+                                    (:rows dataset-b)))
+                       (:rows dataset-a))
+                      headers))
+      (throw (RuntimeException. (str "Can't calculate matrix-product for incompatible datasets - common columns: " (st/join ", " columns-common)))))))
