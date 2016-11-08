@@ -108,3 +108,32 @@
                        (:rows dataset-a))
                       headers))
       (throw (RuntimeException. (str "Can't calculate matrix-product for incompatible datasets - common columns: " (st/join ", " columns-common)))))))
+
+(defn cast-dataset [dataset id-variables column-variables value-variable aggregate-fn]
+  "Cast dataset/ create pivot table. Reverses melt."
+  (letfn [(row-key [r] "create a key to identify the row"
+            (map r id-variables))
+          (collect-vals [or nr] "pivot creating headers for column-variable values"
+            (let [value (nr value-variable)]
+              (if (nil? or) ;; use new row to create or update old-hash results 
+                (into {} (for [[k v] nr]
+                           (if (contains? (set column-variables) k) ;; pivot on column-variable
+                             {v (vector value)}
+                             (if (contains? (set id-variables) k) ;; duplicate id
+                                 {k v}))))
+                (reduce-kv (fn [acc k v] (if (contains? (set column-variables) k) ;; pivot on column-variable or return accumulator
+                                         (update acc v (fn [vs] (conj (or vs []) value)))
+                                         acc))
+                           or nr))))
+          (aggregate-vals [m] "collapse values for each new header to single aggregate"
+            (into {} (for [[k v] m] {k (if (vector? v) (aggregate-fn v) v)})))
+          (collect-cols [oc r] "gather new headers"
+            (clojure.set/union oc (set (map r column-variables))))]
+    (loop [rows-seq (:rows dataset)
+           rows-hash {}
+           columns #{}]
+      (if (seq rows-seq)
+        (let [row (first rows-seq)]
+          (recur (rest rows-seq) (update rows-hash (row-key row) collect-vals row) (collect-cols columns row)))
+        (make-dataset (->> rows-hash vals (map aggregate-vals))
+                      (into id-variables columns))))))
