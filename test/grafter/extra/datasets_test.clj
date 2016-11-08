@@ -1,6 +1,6 @@
 (ns grafter.extra.datasets-test
   (:require [clojure.test :refer :all]
-            [grafter.tabular :refer [make-dataset move-first-row-to-header column-names test-dataset]]
+            [grafter.tabular :refer [make-dataset move-first-row-to-header column-names test-dataset melt]]
             [grafter.extra.datasets :refer :all]
             [grafter.extra.cell.string :refer [blank?]]))
 
@@ -112,3 +112,10 @@
       (testing "Incompatible datasets (common headers)"
         (is (thrown-with-msg? RuntimeException #"incompatible datasets"
                               (matrix-product dataset-a dataset-a)))))))
+
+(deftest cast-test
+  (testing "round-trips melt"
+    (let [dataset (make-dataset [[1 2 3 4]] [:id :a :b :c])
+          melted (melt dataset [:id])
+          casted (cast-dataset melted [:id] [:variable] :value first)]
+      (is (datasets-match? dataset casted)))))
