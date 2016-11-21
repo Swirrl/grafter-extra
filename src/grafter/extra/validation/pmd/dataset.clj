@@ -24,6 +24,9 @@
 (defn check-for-modified [dataset-uri]
   (checker "ds-has-modified.sparql" dataset-uri "is missing a dcterms:modified"))
 
+(defn check-for-structure [dataset-uri]
+  (checked "ds-has-structure.sparql" dataset-uri "is missing a qb:DataStructureDefinition"))
+
 (defn check-for-refarea [dataset-uri]
   (checker "ds-has-refarea.sparql" dataset-uri "is missing a reference area dimension"))
 
