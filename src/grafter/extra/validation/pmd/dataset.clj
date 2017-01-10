@@ -52,6 +52,7 @@
                      check-for-pmd-graph
                      check-for-title
                      check-for-label
+                     check-for-structure
                      check-for-refarea
                      check-for-code-lists
                      check-for-code-labels
