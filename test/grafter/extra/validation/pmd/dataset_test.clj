@@ -14,7 +14,7 @@
                        "is missing a reference area dimension"
                        "is missing reference area levels"
                        "is missing codelists"
-                       "has codes missing labels"
+                       "has codes missing labels, e.g. http://example.org/ns#unlabelled-code"
                        "has units without labels")
         invalid (with-repository-containing [r "./test/resources/cube-bad.ttl"]
                   (distinct
