@@ -1,5 +1,7 @@
 (ns grafter.extra.validation.pmd.dataset
-  (:require [grafter.extra.validation :refer [presence-checker absence-checker]]
+  (:require [grafter.extra.validation :refer [presence-checker
+                                              absence-checker
+                                              example-finder]]
             [grafter.extra.sparql :as sparql]))
 
 (defn template [filename]
@@ -39,8 +41,8 @@
                    "is missing codelists"))
 
 (defn check-for-code-labels [dataset-uri]
-  (absence-checker ((template "ds-codes-without-labels.sparql") {:dataset-uri dataset-uri})
-                   "has codes missing labels"))
+  (example-finder ((template "ds-codes-without-labels.sparql") {:dataset-uri dataset-uri})
+                  "has codes missing labels"))
 
 (defn check-for-measurement-unit-labels [dataset-uri]
   (absence-checker ((template "ds-units-without-labels.sparql") {:dataset-uri dataset-uri})

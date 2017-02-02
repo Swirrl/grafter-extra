@@ -40,3 +40,14 @@
 (defn absence-checker [ask-query message]
   "Returns the message if matching data is found"
   (constraint-checker true? ask-query message))
+
+
+(defn example-finder [example-query message]
+  (fn [repository]
+    (with-open [connection (->connection repository)]
+      (let [result (query connection example-query)]
+        (if (seq result)
+          (-> result
+              last
+              :example
+              ((partial str message ", e.g. "))))))))

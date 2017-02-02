@@ -2,11 +2,12 @@ PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-ASK {
+SELECT (?code as ?example) {
   <{{dataset-uri}}> qb:structure/qb:component ?component .
   ?component qb:dimension ?dimension .
+  ?component qb:codeList/skos:member ?code .
 
   FILTER NOT EXISTS {
-    ?component qb:codeList/skos:member/rdfs:label ?label .
+    ?code rdfs:label ?label .
   }
-}
+} LIMIT 1
