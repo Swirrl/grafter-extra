@@ -12,7 +12,7 @@
     (first (st/split string #"\. "))))
 
 (defn strip-non-value-chars [^java.lang.String string]
-  (.replaceAll string "[^\\.0123456789]" ""))
+  (.replaceAll string "[^\\.0123456789-]" ""))
 
 (defmulti parseValue class)
 

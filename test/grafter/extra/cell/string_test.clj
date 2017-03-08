@@ -15,4 +15,6 @@
     (is (= (parseValue \*)
            nil))
     (is (= (parseValue "*")
-           nil))))
+           nil))
+    (is (= (parseValue "-4")
+           -4))))
