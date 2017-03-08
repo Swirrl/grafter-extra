@@ -16,7 +16,7 @@ eg:d1 qb:structure [qb:component eg:comp1, eg:comp2, eg:comp3 ] .
 # dimension component without a code list
 eg:comp1 qb:dimension eg:dim1 .
 
-# dimension component without a code list that has codes without labels
+# dimension component with a code list that has codes without labels
 eg:comp2 qb:dimension eg:dim2 ;
          qb:codeList [skos:member eg:unlabelled-code] .
 
