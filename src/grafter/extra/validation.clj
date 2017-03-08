@@ -49,5 +49,5 @@
         (if (seq result)
           (-> result
               last
-              (get "example")
+              :example
               ((partial str message ", e.g. "))))))))

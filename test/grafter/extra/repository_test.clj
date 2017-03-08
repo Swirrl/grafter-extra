@@ -3,13 +3,17 @@
             [grafter.extra.repository :refer :all]
             [grafter.rdf.repository :refer [repo query ->connection]]
             [grafter.rdf.protocols :refer [->Quad add]])
-  (:import [org.openrdf.repository RepositoryConnection]))
+  (:import [org.openrdf.repository RepositoryConnection]
+           [java.net URI]))
+
+(def test-quad
+  (apply ->Quad (map #(URI. %) '("http://s" "http://p" "http://o" "http://g"))))
 
 (deftest with-repository-test
   (testing "binds a repository"
     (with-repository [test-repo (repo)]
       (with-open [connection (->connection test-repo)]
-        (let [input (->Quad "http://s" "http://p" "http://o" "http://g")]
+        (let [input test-quad]
           (add connection input)
           (let [output (query connection "SELECT * WHERE { ?s ?p ?o }")]
             (is (= 1
@@ -24,7 +28,7 @@
                     (query connection anything-there?)))))]
 
       (testing "from a sequence of statements"
-        (let [data (list (->Quad "http://s" "http://p" "http://o" "http://g"))]
+        (let [data (list test-quad)]
           (is (repo-loaded-with? data))))
 
       (testing "from a file"
