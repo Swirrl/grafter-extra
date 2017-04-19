@@ -1,0 +1,9 @@
+SELECT ?example WHERE {
+    ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim .
+    ?dim a qb:DimensionProperty ;
+        qb:codeList ?list .
+    ?list a skos:Collection .
+    ?obs ?dim ?v .
+    FILTER NOT EXISTS { ?v a skos:Concept . ?list skos:member+ ?v }
+    BIND(?v as ?example)
+} LIMIT 1

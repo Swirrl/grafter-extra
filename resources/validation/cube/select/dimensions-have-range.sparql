@@ -1,0 +1,5 @@
+SELECT ?example WHERE {
+  ?dim a qb:DimensionProperty .
+  FILTER NOT EXISTS { ?dim rdfs:range [] }
+  BIND(?dim AS ?example)
+} LIMIT 1

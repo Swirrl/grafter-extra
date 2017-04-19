@@ -1,0 +1,5 @@
+SELECT ?example WHERE {
+  ?dsd a qb:DataStructureDefinition .
+  FILTER NOT EXISTS { ?dsd qb:component [qb:componentProperty [a qb:MeasureProperty]] }
+  BIND(?dsd AS ?example)
+} LIMIT 1

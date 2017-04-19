@@ -1,0 +1,7 @@
+SELECT ?example WHERE {
+  ?slicekey a qb:SliceKey;
+      qb:componentProperty ?prop .
+  ?dsd qb:sliceKey ?slicekey .
+  FILTER NOT EXISTS { ?dsd qb:component [qb:componentProperty ?prop] }
+  BIND(?prop AS ?example)
+} LIMIT 1

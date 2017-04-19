@@ -1,0 +1,7 @@
+SELECT ?example WHERE {
+    ?obs qb:dataSet/qb:structure/qb:component ?component .
+    ?component qb:componentRequired "true"^^xsd:boolean ;
+               qb:componentProperty ?attr .
+    FILTER NOT EXISTS { ?obs ?attr [] }
+    BIND(?obs AS ?example)
+} LIMIT 1

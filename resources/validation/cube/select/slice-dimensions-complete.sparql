@@ -1,0 +1,5 @@
+SELECT ?example WHERE {
+  ?slice qb:sliceStructure [qb:componentProperty ?dim] .
+  FILTER NOT EXISTS { ?slice ?dim [] }
+  BIND(?slice as ?example)
+} LIMIT 1

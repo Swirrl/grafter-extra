@@ -1,0 +1,11 @@
+SELECT ?example WHERE {
+    # Observation in a non-measureType cube
+    ?obs qb:dataSet/qb:structure ?dsd .
+    FILTER NOT EXISTS { ?dsd qb:component/qb:componentProperty qb:measureType }
+
+    # verify every measure is present
+    ?dsd qb:component/qb:componentProperty ?measure .
+    ?measure a qb:MeasureProperty;
+    FILTER NOT EXISTS { ?obs ?measure [] }
+    BIND(?obs AS ?example)
+} LIMIT 1

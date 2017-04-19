@@ -1,0 +1,7 @@
+SELECT ?example WHERE {
+  ?dsd qb:component ?componentSpec .
+  ?componentSpec qb:componentRequired "false"^^xsd:boolean ;
+                 qb:componentProperty ?component .
+  FILTER NOT EXISTS { ?component a qb:AttributeProperty }
+  BIND(?component AS ?example)
+} LIMIT 1
