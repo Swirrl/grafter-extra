@@ -156,13 +156,8 @@
 
 ;; Abbreviated and Normalised data cubes
 ;; https://www.w3.org/TR/vocab-data-cube/#h2_normalize
-
-(defn- update [repository update-query]
-  (with-open [connection (->connection repository)]
-    (let [result (update! connection update-query)]
-      result)))
-
 (defn normalise-cube [repository]
-  (doseq [update-qry ["type-and-property-closure.sparql"
-                      "push-down-attachment-levels.sparql"]]
-    (update repository (cube-resource update-qry))))
+  (with-open [connection (->connection repository)]
+    (doseq [update-query ["type-and-property-closure.sparql"
+                        "push-down-attachment-levels.sparql"]]
+      (update! connection (cube-resource update-query)))))
