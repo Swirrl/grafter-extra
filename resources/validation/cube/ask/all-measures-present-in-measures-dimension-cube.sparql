@@ -5,7 +5,7 @@ ASK {
           {
               # Find the DSDs and check how many measures they have
               SELECT ?dsd (COUNT(?m) AS ?numMeasures) WHERE {
-                  ?dsd qb:component/qb:componentProperty ?m.
+                  ?dsd qb:component/(qb:componentProperty|qb:measure) ?m.
                   ?m a qb:MeasureProperty .
               } GROUP BY ?dsd
           }
@@ -19,7 +19,7 @@ ASK {
           ?obs2 qb:dataSet ?dataset ;
                 qb:measureType ?m2 .
           FILTER NOT EXISTS { 
-              ?dsd qb:component/qb:componentProperty ?dim .
+              ?dsd qb:component/(qb:componentProperty|qb:attribute|qb:dimension) ?dim .
               FILTER (?dim != qb:measureType)
               ?dim a qb:DimensionProperty .
               ?obs1 ?dim ?v1 . 
