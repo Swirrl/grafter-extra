@@ -24,6 +24,31 @@
       (is (thrown? java.lang.RuntimeException
                    (column-bind short long))))))
 
+(deftest assert-column-names-match-test
+  (testing "No error where columns match"
+    (testing "Same order"
+      (is (empty? (column-name-differences (test-dataset 2 3)
+                                           (test-dataset 2 3)))))
+    (testing "Different order"
+      (is (empty? (column-name-differences (make-dataset [[1 1 1]] [:a :b :c])
+                                           (make-dataset [[1 1 1]] [:c :b :a]))))))
+  (testing "Error raised where columns don't match"
+    (testing "Two dataset comparison"
+      (is (= #{:d}
+             (column-name-differences
+              (make-dataset [[1 1 1]] [:a :b :c])
+              (make-dataset [[1 1 1]] [:a :b :c :d]))))
+      (is (= #{"d" "e"}
+             (column-name-differences
+              (test-dataset 2 3)
+              (test-dataset 2 5)))))
+    (testing "Three dataset comparison"
+      (is (= #{:d :e}
+             (column-name-differences
+              (make-dataset [[1 1 1]] [:a :b :c])
+              (make-dataset [[1 1 1]] [:a :b :c :d])
+              (make-dataset [[1 1 1]] [:a :b :c :d :e])))))))
+
 (deftest row-bind-test
   (testing "Binds rows together"
     (let [a (test-dataset 2 3)
@@ -32,7 +57,7 @@
   (testing "Fails if column headers differ"
     (let [a (test-dataset 2 3)
           c (test-dataset 4 5)]
-      (is (thrown? java.lang.AssertionError
+      (is (thrown? java.lang.RuntimeException
                    (row-bind a c)))))
   (testing "Works with single dataset"
     (is (= 3 (-> (row-bind (test-dataset 3 3)) :rows count))))

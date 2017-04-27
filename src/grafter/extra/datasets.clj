@@ -1,7 +1,11 @@
 (ns grafter.extra.datasets
   (:require [clojure.string :as st]
+            [clojure.data :refer [diff]]
+            [clojure.set :refer [union]]
+            [clojure.test :refer [is]]
             [grafter.sequences :as seqs]
             [grafter.tabular :refer [make-dataset column-names columns]]
+            [grafter.extra.sequence :refer [to-sentence]]
             [incanter.core :refer [nrow]]))
 
 (defn row-set [dataset]
@@ -12,9 +16,20 @@
         row-set-b (row-set dataset-b)]
     (= row-set-a row-set-b)))
 
+(defn column-name-differences [& datasets]
+  (let [headers (map (comp set column-names) datasets)]
+    (->> (partition 2 1 headers) ;; compare pairwise
+         (map (fn [[a b]] (->> (diff a b)
+                               (take 2)
+                               (remove nil?)))) ;; find non-common columns
+         flatten
+         (apply union))))
+
 (defn row-bind [& datasets]
-  { :pre [(apply = (map column-names datasets))]}
   "Combine datasets by appending rows. Column names must match."
+  (let [diffs (apply column-name-differences datasets)]
+    (if (not (empty? diffs))
+      (throw (RuntimeException. (str "Column names differ: " (to-sentence diffs))))))
   (let [headers (column-names (first datasets))
         metas (apply merge (map meta datasets))
         rows (mapcat :rows datasets)]
@@ -115,7 +130,7 @@
             (map r id-variables))
           (collect-vals [or nr] "pivot creating headers for column-variable values"
             (let [value (nr value-variable)]
-              (if (nil? or) ;; use new row to create or update old-hash results 
+              (if (nil? or) ;; use new row to create or update old-hash results
                 (into {} (for [[k v] nr]
                            (if (contains? (set column-variables) k) ;; pivot on column-variable
                              {v (vector value)}
