@@ -1,0 +1,21 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix : <http://www.example.org/> .
+
+:graph1 {
+  :cs1 a skos:ConceptScheme .
+}
+
+:graph2 {
+  :cs2 a skos:ConceptScheme .
+}
+
+:graph3 {
+  :o1 a owl:Ontology .
+}
+
+:graph4 {
+  :o2 a owl:Ontology .
+}
+

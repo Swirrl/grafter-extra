@@ -1,0 +1,8 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?example WHERE {
+  GRAPH ?example {
+    { ?v a skos:ConceptScheme } UNION { ?v a owl:Ontology } .
+  } 
+} GROUP BY ?example HAVING (COUNT(?v) > 1) LIMIT 1
