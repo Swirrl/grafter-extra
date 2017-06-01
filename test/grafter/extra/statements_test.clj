@@ -21,3 +21,33 @@
 
       (is (= 0
              (count (statements-where {:s "http://example.com/sight"} quads)))))))
+
+(def eg-uri (partial str "http://eg.net/"))
+
+(defn- make-quads [quad-slugs]
+  (->> quad-slugs
+       (map (fn [slugs] (map eg-uri slugs)))
+       (map (partial apply ->Quad))))
+
+(deftest bijection-test
+  (testing "Translate quads"
+    (let [quad-a (->Quad (eg-uri "s") (eg-uri "p") (eg-uri "o") (eg-uri "c"))
+          quad-b (->Quad (eg-uri "S") (eg-uri "p") (eg-uri "o") (eg-uri "C"))] 
+      (is (= quad-a
+             ((bijection {:s {(eg-uri "S") (eg-uri "s")}
+                          :c {(eg-uri "C") (eg-uri "c")}}) quad-b))))))
+
+(deftest isomorphism-test
+  (let [sequence-a (make-quads [["s1" "p1" "o1" "c1"]
+                                ["s2" "p2" "o2" "c2"]])
+        sequence-b (make-quads [["XX" "p1" "o1" "c1"]
+                                ["s2" "p2" "o2" "c2"]])
+        a->b {:s {(eg-uri "XX") (eg-uri "s1")}}]
+    (testing "matches self"
+      (is (isomorphic? sequence-a sequence-a)))
+    (testing "matches reverse"
+      (is (isomorphic? sequence-a (reverse sequence-a))))
+    (testing "doesn't match different sequence"
+      (is (not (isomorphic? sequence-a sequence-b))))
+    (testing "matches with bijection"
+      (is (isomorphic? sequence-a sequence-b a->b)))))
