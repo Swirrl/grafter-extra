@@ -40,6 +40,10 @@
   (absence-checker ((template "ds-has-dimensions-without-codelists.sparql") {:dataset-uri dataset-uri})
                    "is missing codelists"))
 
+(defn check-for-codes [dataset-uri]
+  (example-finder ((template "ds-has-codelist-without-codes.sparql") {:dataset-uri dataset-uri})
+                   "codelist is empty"))
+
 (defn check-for-code-labels [dataset-uri]
   (example-finder ((template "ds-codes-without-labels.sparql") {:dataset-uri dataset-uri})
                   "has codes missing labels"))
@@ -57,6 +61,7 @@
                      check-for-structure
                      check-for-refarea
                      check-for-code-lists
+                     check-for-codes
                      check-for-code-labels
                      check-for-measurement-unit-labels
                      check-for-area-level)]
