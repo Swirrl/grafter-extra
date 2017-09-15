@@ -1,4 +1,4 @@
-(defproject grafter/extra "0.2.1"
+(defproject grafter/extra "0.2.2-SNAPSHOT"
   :description "A collection of extra transformations and tools for developing Grafter pipelines"
   :url "http://grafter.org/"
   :license {:name "Eclipse Public License"
