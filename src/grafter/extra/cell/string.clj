@@ -24,11 +24,16 @@
 
 (defmethod parseValue java.lang.String [x]
   (let [cleaned (strip-non-value-chars x)]
-    (if (= "" cleaned)
-      nil
-      (if (.contains cleaned ".")
-        (Double/parseDouble cleaned)
-        (Integer/parseInt cleaned)))))
+    (try
+      (Integer/parseInt cleaned)
+      (catch NumberFormatException e
+        (try
+          (BigInteger. cleaned)
+          (catch NumberFormatException e
+            (try
+              (BigDecimal. cleaned)
+              (catch NumberFormatException e
+                nil))))))))
 
 (defmethod parseValue :default [x]
   x)
