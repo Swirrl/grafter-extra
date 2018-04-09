@@ -37,8 +37,8 @@
                    "is missing reference area levels"))
 
 (defn check-for-code-lists [dataset-uri]
-  (absence-checker ((template "ds-has-dimensions-without-codelists.sparql") {:dataset-uri dataset-uri})
-                   "is missing codelists"))
+  (example-finder ((template "ds-has-dimension-component-without-codelists.sparql") {:dataset-uri dataset-uri})
+                  "has dimension component without a codelist"))
 
 (defn check-for-codes [dataset-uri]
   (example-finder ((template "ds-has-codelist-without-codes.sparql") {:dataset-uri dataset-uri})
