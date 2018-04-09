@@ -1,7 +1,7 @@
 @prefix qb:       <http://purl.org/linked-data/cube#> .
 @prefix eg:       <http://example.org/ns#> .
 @prefix sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#> .
-@prefix pmd-qb:   <http://publishmydata.com/def/qb/>
+@prefix pmd-qb:   <http://publishmydata.com/def/qb/> .
 
 eg:d1 a qb:DataSet .
 
