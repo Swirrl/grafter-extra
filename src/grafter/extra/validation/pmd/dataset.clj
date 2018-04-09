@@ -72,3 +72,4 @@
         checks (list check-for-modified)]
     (->> checks (map apply-check) (remove nil?))))
 
+;; has only one foi:ReferenceFeatureProperty per dataset

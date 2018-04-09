@@ -1,6 +1,6 @@
 (ns grafter.extra.repository
   (:require [grafter.rdf :refer [add statements]]
-            [grafter.rdf.repository :refer [shutdown repo ->connection]]))
+            [grafter.rdf4j.repository :refer [shutdown sail-repo ->connection]]))
 
 (defmacro with-repository [repo-binding & body]
   `(let ~repo-binding
@@ -15,7 +15,7 @@
       (add connection data))))
 
 (defmacro with-repository-containing [[repo-binding repo-contents] & body]
-  `(let [~repo-binding (repo)]
+  `(let [~repo-binding (sail-repo)]
      (try
        (load-contents ~repo-binding ~repo-contents)
        ~@body

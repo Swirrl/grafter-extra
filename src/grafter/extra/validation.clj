@@ -1,5 +1,5 @@
 (ns grafter.extra.validation
-  (:require [grafter.rdf.repository :refer [->connection query]]))
+  (:require [grafter.rdf4j.repository :refer [->connection query]]))
 
 (defn- ask [repository ask-query]
   (with-open [connection (->connection repository)]

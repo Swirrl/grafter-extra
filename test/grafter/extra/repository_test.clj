@@ -1,7 +1,7 @@
 (ns grafter.extra.repository-test
   (:require [clojure.test :refer :all]
             [grafter.extra.repository :refer :all]
-            [grafter.rdf.repository :refer [repo query ->connection]]
+            [grafter.rdf4j.repository :refer [sail-repo query ->connection]]
             [grafter.rdf.protocols :refer [->Quad add]])
   (:import [org.openrdf.repository RepositoryConnection]
            [java.net URI]))
@@ -11,7 +11,7 @@
 
 (deftest with-repository-test
   (testing "binds a repository"
-    (with-repository [test-repo (repo)]
+    (with-repository [test-repo (sail-repo)]
       (with-open [connection (->connection test-repo)]
         (let [input test-quad]
           (add connection input)
