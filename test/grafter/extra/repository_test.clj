@@ -3,8 +3,7 @@
             [grafter.extra.repository :refer :all]
             [grafter.rdf4j.repository :refer [sail-repo query ->connection]]
             [grafter.rdf.protocols :refer [->Quad add]])
-  (:import [org.openrdf.repository RepositoryConnection]
-           [java.net URI]))
+  (:import [java.net URI]))
 
 (def test-quad
   (apply ->Quad (map #(URI. %) '("http://s" "http://p" "http://o" "http://g"))))
