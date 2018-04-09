@@ -49,8 +49,8 @@
                   "has codes missing labels"))
 
 (defn check-for-measurement-unit-labels [dataset-uri]
-  (absence-checker ((template "ds-units-without-labels.sparql") {:dataset-uri dataset-uri})
-                   "has units without labels"))
+  (example-finder ((template "ds-units-without-labels.sparql") {:dataset-uri dataset-uri})
+                  "has units without labels"))
 
 (defn errors [repo dataset-uri]
   (let [apply-check (fn [check] ((check dataset-uri) repo))

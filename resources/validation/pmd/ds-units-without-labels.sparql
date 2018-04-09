@@ -3,7 +3,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX sdmx-concept: <http://purl.org/linked-data/sdmx/2009/concept#>
 PREFIX sdmx-attribute: <http://purl.org/linked-data/sdmx/2009/attribute#>
 
-ASK {
+SELECT (?unit as ?example) {
   {
     ?unit a sdmx-concept:unitMeasure .
   } UNION {
@@ -13,4 +13,4 @@ ASK {
   FILTER NOT EXISTS {
     ?unit rdfs:label ?label .
   }
-}
+} LIMIT 1
