@@ -1,6 +1,7 @@
 @prefix qb:       <http://purl.org/linked-data/cube#> .
 @prefix eg:       <http://example.org/ns#> .
 @prefix sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix pmd-qb:   <http://publishmydata.com/def/qb/>
 
 eg:d1 a qb:DataSet .
 
@@ -18,11 +19,11 @@ eg:comp1 qb:dimension eg:dim1 .
 
 # dimension component with a code list that has no codes
 eg:comp2 qb:dimension eg:dim2 ;
-         qb:codeList eg:codelist2 .
+         pmd-qb:codesUsed eg:codelist2 .
 
 # dimension component with a code list that has codes without labels
 eg:comp3 qb:dimension eg:dim3 ;
-         qb:codeList [skos:member eg:unlabelled-code] .
+         pmd-qb:codesUsed [skos:member eg:unlabelled-code] .
 
 # unit without a label
 eg:unit a <http://purl.org/linked-data/sdmx/2009/concept#unitMeasure> .

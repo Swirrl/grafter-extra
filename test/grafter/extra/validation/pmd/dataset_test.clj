@@ -13,7 +13,7 @@
                        "is missing a rdfs:label"
                        "is missing a reference area dimension"
                        "is missing reference area levels"
-                       "is missing codelists"
+                       "has dimension component without a codelist, e.g. http://example.org/ns#comp1"
                        "codelist is empty, e.g. http://example.org/ns#codelist2"
                        "has codes missing labels, e.g. http://example.org/ns#unlabelled-code"
                        "has units without labels")
