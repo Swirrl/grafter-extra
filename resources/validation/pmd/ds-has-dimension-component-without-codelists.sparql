@@ -7,6 +7,6 @@ SELECT (?component as ?example) {
   ?component qb:dimension ?dimension .
 
   FILTER NOT EXISTS {
-    ?component <http://publishmydata.com/def/qb/codesUsed> ?codelist .
+    ?component <http://publishmydata.com/def/cube/codesUsed> ?codelist .
   }
 } LIMIT 1
