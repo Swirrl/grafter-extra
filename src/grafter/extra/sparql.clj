@@ -1,7 +1,26 @@
 (ns grafter.extra.sparql
-  (:require [grafter.sequences :refer [alphabetical-column-names]]
-            [clojure.string :as string]
+  (:require [clojure.string :as string]
             [selmer.parser :as selmer]))
+
+
+(defn- column-names-seq
+  "Given an alphabet string generate a lazy sequences of column names
+  e.g.
+  `(column-names-seq \"abcdefghijklmnopqrstuvwxyz\") ;; => (\"a\" \"b\" \"c\" ... \"aa\" \"ab\")`"
+  [alphabet]
+  (->> (map str alphabet)
+       (iterate (fn [chars]
+                  (for [x chars
+                        y alphabet]
+                    (str x y))))
+       (apply concat)))
+
+(defn- alphabetical-column-names
+  "Returns an infinite sequence of alphabetized column names.  If more
+  than 26 are required the sequence will count AA AB AC ... BA BB BC
+  ... ZZZA ... etc"
+  []
+  (column-names-seq "abcdefghijklmnopqrstuvwxyz"))
 
 (defn to-var [string]
   (str "?" string))
