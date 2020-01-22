@@ -1,6 +1,6 @@
 (ns grafter.extra.statements-test
   (:require [clojure.test :refer :all]
-            [grafter.rdf.protocols :refer [->Quad]]
+            [grafter-2.rdf.protocols :refer [->Quad]]
             [grafter.extra.statements :refer :all]
             [grafter.vocabularies.rdf :refer :all]))
 
@@ -32,7 +32,7 @@
 (deftest bijection-test
   (testing "Translate quads"
     (let [quad-a (->Quad (eg-uri "s") (eg-uri "p") (eg-uri "o") (eg-uri "c"))
-          quad-b (->Quad (eg-uri "S") (eg-uri "p") (eg-uri "o") (eg-uri "C"))] 
+          quad-b (->Quad (eg-uri "S") (eg-uri "p") (eg-uri "o") (eg-uri "C"))]
       (is (= quad-a
              ((bijection {:s {(eg-uri "S") (eg-uri "s")}
                           :c {(eg-uri "C") (eg-uri "c")}}) quad-b))))))

@@ -1,6 +1,6 @@
 (ns grafter.extra.validation.pmd-test
   (:require [clojure.test :refer :all]
-            [grafter.rdf :refer [statements]]
+            [grafter-2.rdf4j.io :refer [statements]]
             [grafter.extra.repository :refer [with-repository-containing]]
             [grafter.extra.validation.pmd :refer :all]))
 
@@ -19,4 +19,3 @@
     (doseq [message expected]
       (is (includes? invalid message))
       (is (not (includes? valid message))))))
-

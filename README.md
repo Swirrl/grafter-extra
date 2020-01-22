@@ -6,6 +6,7 @@ The functions provided here are useful enough to be re-used but haven't yet demo
 
 See [grafter.org](http://grafter.org/) for more details.
 
+NOTE: As of grafter-extra 0.3.0; the namespaces that depended upon incanter and the deprecated grafter.tabular library have been moved into a separate deprecated grafter.tabular-extra library.
 
 ## License
 
