@@ -1,5 +1,7 @@
 # Grafter Extra
 
+[![Clojars Project](https://img.shields.io/clojars/v/grafter/extra.svg)](https://clojars.org/grafter/extra)
+
 A library of tranformations and tools that can be used when developing grafter pipelines.
 
 The functions provided here are useful enough to be re-used but haven't yet demonstrated that they deserve to enter the core grafter library.
