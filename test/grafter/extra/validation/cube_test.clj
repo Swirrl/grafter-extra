@@ -1,6 +1,5 @@
 (ns grafter.extra.validation.cube-test
   (:require [clojure.test :refer :all]
-            [grafter.rdf.repository :refer [repo]]
             [grafter.extra.repository :refer [with-repository-containing
                                               load-contents]]
             [grafter.extra.validation.cube :refer :all]))

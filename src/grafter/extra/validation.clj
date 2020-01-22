@@ -1,5 +1,5 @@
 (ns grafter.extra.validation
-  (:require [grafter.rdf.repository :refer [->connection query]]))
+  (:require [grafter-2.rdf4j.repository :refer [->connection query]]))
 
 (defn- ask [repository ask-query]
   (with-open [connection (->connection repository)]
@@ -10,7 +10,7 @@
   "Returns a function for asserting that a condition, specified by the ask-query,
    holds for the data in a given repository. Throws an AssertionError if the response
    is invalid."
-  
+
   (fn [repository]
     (if (invalid? (ask repository ask-query))
       (throw (AssertionError. (str "Constraint violated: " message))))))

@@ -1,6 +1,6 @@
 (ns grafter.extra.statements
   (:require [grafter.vocabularies.rdf :refer [rdf:a]]
-            [grafter.rdf.protocols :refer [->Quad]]))
+            [grafter-2.rdf.protocols :refer [->Quad]]))
 
 (defn statements-where [attr-map statements]
   "Filters a sequence of statements according to an attribute map

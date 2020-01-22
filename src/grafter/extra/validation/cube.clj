@@ -1,9 +1,9 @@
 (ns grafter.extra.validation.cube
   (:require [clojure.java.io :as io]
             [grafter.extra.validation :refer [absence-asserter example-finder]]
-            [grafter.rdf
-             [protocols :refer [update!]]
-             [repository :refer [->connection]]]))
+            [grafter-2.rdf
+             [protocols :refer [update!]]]
+            [grafter-2.rdf4j.repository :refer [->connection]]))
 
 (defn cube-resource [filename]
   (->> filename (str "validation/cube/") io/resource slurp))
