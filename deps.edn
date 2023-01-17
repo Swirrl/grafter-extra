@@ -2,4 +2,10 @@
  :deps {org.clojure/clojure {:mvn/version "1.10.1"}
         io.github.swirrl/grafter.io {:mvn/version "3.0.0-SNAPSHOT"}
         io.github.swirrl/grafter.repository {:mvn/version "3.0.0-SNAPSHOT"}
-        selmer/selmer {:mvn/version "1.0.4"}}}
+        selmer/selmer {:mvn/version "1.0.4"}}
+
+ :aliases {:test
+           {:extra-paths ["test" "test/resources"]
+            :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}
+                         lambdaisland/kaocha-junit-xml {:mvn/version "1.17.101"}
+                         org.slf4j/slf4j-nop {:mvn/version "2.0.6"}}}}}

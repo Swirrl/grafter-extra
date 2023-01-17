@@ -1,0 +1,15 @@
+#kaocha/v1
+{:tests [{:type :kaocha.type/clojure.test
+          :id   :unit
+          :source-paths  ["src"]
+          :test-paths    ["test"]
+          :ns-patterns   ["-test$"]}
+         ]
+ :reporter kaocha.report/documentation
+
+ :kaocha.plugin.junit-xml/target-file "test-results/kaocha/results.xml"
+
+ :plugins [:kaocha.plugin/print-invocations
+           :kaocha.plugin/profiling
+           :kaocha.plugin/junit-xml]
+ }
